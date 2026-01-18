@@ -1,0 +1,44 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# Gradle
+.gradle/
+build/
+# Logs
+logs/
+*.log
+# Spring Boot DevTools
+spring-boot-devtools.properties
+# IDE - IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+# IDE - Eclipse
+.project
+.classpath
+.settings/
+bin/
+# IDE - VS Code
+.vscode/
+# OS Files
+.DS_Store
+Thumbs.db
+# Java
+*.class
+# Lombok
+.lombok/
+# Database files
+*.mv.db
+*.trace.db
+*.h2.db
+# Docker
+docker-compose.override.yml
