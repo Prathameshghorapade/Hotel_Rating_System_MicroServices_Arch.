@@ -1,14 +1,14 @@
 package com.userservice.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -30,6 +30,9 @@ public class User {
 
     @Column(name = "About",length = 50)
     private String about;
+
+    @Transient
+    private List<Rating>ratings=new ArrayList<>();
 
 
 
