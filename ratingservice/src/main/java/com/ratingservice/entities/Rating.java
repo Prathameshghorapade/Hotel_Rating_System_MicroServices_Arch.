@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Document("ratings")
+@Document(collation = "ratings")
 public class Rating {
 
     @Id
