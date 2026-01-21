@@ -1,11 +1,12 @@
 package com.ratingservice.repositories;
 
 import com.ratingservice.entities.Rating;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 
 import java.util.List;
 
-public interface RatingRepository extends MongoRepository<Rating,String> {
+public interface RatingRepository extends JpaRepository<Rating,String> {
 
     List<Rating>findRatingByUserId(String userId);
 
