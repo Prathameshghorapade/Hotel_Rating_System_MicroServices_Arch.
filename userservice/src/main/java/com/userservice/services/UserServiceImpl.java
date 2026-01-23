@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService{
         User foundUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User With This Id Not Found: " + id));
 
-      Rating[]ratings = restTemplate.getForObject("http://localhost:8029/ratings/userId/"+foundUser.getId(),Rating[].class);
+      Rating[]ratings = restTemplate.getForObject("http://RATING-SERVICE/ratings/userId/"+foundUser.getId(),Rating[].class);
 
         assert ratings != null;
         foundUser.setRatings(List.of(ratings));
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService{
 
        ratingList.stream().map(rating -> {
 
-          ResponseEntity<Hotel>forObject =restTemplate.getForEntity("http://localhost:8028/hotel/"+rating.getHotelId(),Hotel.class);
+          ResponseEntity<Hotel>forObject =restTemplate.getForEntity("http://HOTEL-SERVICE/hotel/"+rating.getHotelId(),Hotel.class);
 
           Hotel hotel=forObject.getBody();
 
