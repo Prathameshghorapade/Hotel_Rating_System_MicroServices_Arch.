@@ -3,13 +3,12 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for hotel_service" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-        </processorPath>
+        <module name="serviceregistory" />
+        <module name="ratingservice" />
         <module name="userservice" />
         <module name="hotelservice" />
       </profile>
@@ -18,6 +17,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="hotelservice" options="-parameters" />
+      <module name="ratingservice" options="-parameters" />
+      <module name="serviceregistory" options="-parameters" />
       <module name="userservice" options="-parameters" />
     </option>
   </component>
