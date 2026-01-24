@@ -31,19 +31,19 @@ public class UserController {
 
        List<User>users =userService.getAllUsers();
 
-       return new ResponseEntity<>(users,HttpStatus.FOUND);
+       return new ResponseEntity<>(users,HttpStatus.OK);
 
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User>getUserById(@PathVariable String id){
        User userFound =userService.getUser(id);
 
-       return new ResponseEntity<>(userFound,HttpStatus.FOUND);
+       return new ResponseEntity<>(userFound,HttpStatus.OK);
 
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<User>updateUSer(@PathVariable String id,@RequestBody User user){
 
        User updatedUSer =userService.updateUSer(id,user);
@@ -53,7 +53,7 @@ public class UserController {
        return new ResponseEntity<>(updatedUSer,HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
 
     public ResponseEntity<User>deleteUser(@PathVariable String id){
 
