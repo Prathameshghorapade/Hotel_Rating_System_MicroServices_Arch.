@@ -1,0 +1,38 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+
+            - id: user-service
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/users/**
+
+            - id: hotel-service
+              uri: lb://HOTEL-SERVICE
+              predicates:
+                - Path=/hotel/**,/staffs/**
+
+            - id: rating-service
+              uri: lb://RATING-SERVICE
+              predicates:
+                - Path=/ratings/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
