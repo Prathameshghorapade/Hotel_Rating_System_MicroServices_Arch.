@@ -39,7 +39,7 @@ public class UserController {
     public ResponseEntity<User>getUserById(@PathVariable String id){
        User userFound =userService.getUser(id);
 
-       return new ResponseEntity<>(userFound,HttpStatus.OK);
+       return new ResponseEntity<User>(userFound,HttpStatus.OK);
 
     }
 
