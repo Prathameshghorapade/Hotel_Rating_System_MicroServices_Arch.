@@ -42,3 +42,6 @@ Thumbs.db
 *.h2.db
 # Docker
 docker-compose.override.yml
+
+.idea/
+*.iml
