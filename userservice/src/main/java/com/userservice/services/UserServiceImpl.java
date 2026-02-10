@@ -5,6 +5,8 @@ import com.userservice.entities.Rating;
 import com.userservice.entities.User;
 import com.userservice.exceptions.ResourceNotFoundException;
 import com.userservice.repositories.UserRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
@@ -50,6 +52,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @CircuitBreaker(name = "ratingHotelBreaker",fallbackMethod = "ratingHotelFallBack")
     public User getUser(String id) {
 
         // 1️⃣ Fetch the user from DB
@@ -80,6 +83,18 @@ public class UserServiceImpl implements UserService{
         return foundUser;
     }
 
+    //fallBack Method for circuitBreaker
+    public User ratingHotelFallBack(String id,Exception ex){
+
+        User user=new User();
+        user.setId(id);
+        user.setName("Dummy_Name");
+        user.setEmail("Dummy_Email");
+        user.setAbout("This is Dummy USer Because Some services are Down ");
+
+        return user;
+
+    }
 
 
     @Override
