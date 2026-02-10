@@ -6,6 +6,7 @@ import com.userservice.entities.User;
 import com.userservice.exceptions.ResourceNotFoundException;
 import com.userservice.repositories.UserRepository;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -52,10 +53,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Retry(name = "ratingHotelRetry")
     @CircuitBreaker(name = "ratingHotelBreaker",fallbackMethod = "ratingHotelFallBack")
     public User getUser(String id) {
 
-        // 1️⃣ Fetch the user from DB
+        System.out.println("Calling external services...");
+
+        // Fetch the user from DB
         User foundUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User With This Id Not Found: " + id));
 
@@ -85,6 +89,8 @@ public class UserServiceImpl implements UserService{
 
     //fallBack Method for circuitBreaker
     public User ratingHotelFallBack(String id,Exception ex){
+
+        System.out.println("Fallback triggered after retries!");
 
         User user=new User();
         user.setId(id);
