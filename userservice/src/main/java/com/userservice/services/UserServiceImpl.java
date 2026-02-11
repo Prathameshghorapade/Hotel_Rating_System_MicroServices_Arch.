@@ -6,6 +6,7 @@ import com.userservice.entities.User;
 import com.userservice.exceptions.ResourceNotFoundException;
 import com.userservice.repositories.UserRepository;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,8 +54,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Retry(name = "ratingHotelRetry")
-    @CircuitBreaker(name = "ratingHotelBreaker",fallbackMethod = "ratingHotelFallBack")
+    //@Retry(name = "ratingHotelRetry")
+   // @CircuitBreaker(name = "ratingHotelBreaker",fallbackMethod = "ratingHotelFallBack")
+   @RateLimiter(name = "userRateLimiter",fallbackMethod = "ratingHotelFallBack")
     public User getUser(String id) {
 
         System.out.println("Calling external services...");
